@@ -1,0 +1,52 @@
+/* For home.component.scss */
+
+.col {
+    padding: .4em 1.3em;
+}
+.color-dark {
+    background: #2885C4;
+}
+.color-light {
+    background: #57B3F1;
+}
+
+.panther {
+  background: rgb(87, 241, 100);
+}
+
+
+.life-container {
+    background:#3FA0E1;
+    padding:.5em;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.contatore-col,
+.contatore-col {
+  width: 8%;
+  text-align: center;
+  color: #2885C4
+}
+
+.oraGenerazione-col,
+.oraGenerazione-col {
+  width: 10%;
+  text-align: justify;
+  text-justify: inter-word;
+  background-color: aquamarine
+}
+
+.actions-col,
+.actions-col {
+  width: 10% !important;
+  text-align: center;
+}
+
+.stato-col,
+.stato-col {
+  width: 12%;
+}
+
+.div-button
+{margin-left: 20px}

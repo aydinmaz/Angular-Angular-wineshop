@@ -1,0 +1,124 @@
+
+
+<div style="text-align:center " >
+
+    <p-menubar [model]="items">
+        <div>
+            <input type="text" pInputText placeholder="Search">
+            <button pButton label="Logout" icon="fa fa-sign-out" style="margin-left:.25em"></button>
+        </div>
+    </p-menubar>
+
+<div *ngIf="wines"  >
+    <h3 class="first">Basic</h3>
+    <p-table [value]="wines"  [columns]="cols" selectionMode="single" [(selection)]="selectedWine"
+    (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="15">
+        <ng-template pTemplate="caption">
+            List of Wines
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr> 
+                <th *ngFor="let col of cols" [pSortableColumn]="col.field">
+                        {{col.header}}
+                        <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr [pSelectableRow]="rowData">
+                <td *ngFor="let col of cols">
+                            {{rowData[col.field]}}
+                </td>
+                <td>
+                    
+                    <button pButton type="button" (click)="deletewine(rowData)" id="but"
+                    label="Delete" icon="fa fa-close" class="ui-button-warning" ></button>
+                    <span class="div-button">
+                    <button pButton type="button" (click)="showDialogToEdit(rowData)" id="but"
+                    label="Edit" icon="fa fa-check" class="ui-button-danger" ></button>
+                    </span>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary" let-rowData>
+            <div style="text-align:left">
+                <button type="button" pButton icon="fa fa-plus" 
+                (click)="showDialogToAdd()" label="Add"></button>
+            </div>
+        </ng-template>
+    </p-table>
+
+    <br><br><br><br>
+
+
+    <p-dialog header="Wine Details" [(visible)]="displayDialog" 
+        [responsive]="true" showEffect="fade" [modal]="true" [width]="300">
+        <div class="ui-g ui-fluid" *ngIf="wine">
+            <div class="ui-g-12">
+                <div class="ui-g-4">
+                    <label for="id">Id</label>
+                </div>
+                <div class="ui-g-8">
+                    <input pInputText id="id" [(ngModel)]="wine.id" />
+                </div>
+            </div>
+            <div class="ui-g-12">
+                <div class="ui-g-4">
+                    <label for="name">Name</label>
+                </div>
+                <div class="ui-g-8">
+                    <input pInputText id="name" [(ngModel)]="wine.name" />
+                </div>
+            </div>
+            <div class="ui-g-12">
+                <div class="ui-g-4">
+                    <label for="quantity">Quantity</label>
+                </div>
+                <div class="ui-g-8">
+                    <input pInputText id="quantity" [(ngModel)]="wine.quantity" />
+                </div>
+            </div>
+            <div class="ui-g-12">
+                <div class="ui-g-4">
+                    <label for="total">Total</label>
+                </div>
+                <div class="ui-g-8">
+                    <input pInputText id="total" [(ngModel)]="wine.total" />
+                </div>
+            </div>
+            <div class="ui-g-12">
+                <div class="ui-g-4">
+                    <label for="reserved">Reserved</label>
+                </div>
+                <div class="ui-g-8">
+                    <input pInputText id="reserved" [(ngModel)]="wine.reserved" />
+                </div>
+            </div>
+            <div class="ui-g-12">
+                <div class="ui-g-4">
+                    <label for="available">Available</label>
+                </div>
+                <div class="ui-g-8">
+                    <input pInputText id="available" [(ngModel)]="wine.available" />
+                </div>
+            </div>
+        </div>
+        <p-footer>
+            <div class="ui-dialog-buttonpane ui-helper-clearfix">
+                <button type="button" pButton icon="fa fa-close" 
+                    (click)="delete()" label="Delete"></button>
+                <button type="button" pButton icon="fa fa-check" 
+                    (click)="save()" label="Save"></button>
+            </div>
+        </p-footer>
+    </p-dialog>
+
+
+</div>
+
+
+
+
