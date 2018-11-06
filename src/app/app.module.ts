@@ -8,11 +8,14 @@ import {DataTableModule, ButtonModule, InputTextModule,
   DialogModule, MenubarModule} from 'primeng/primeng';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TableModule} from 'primeng/table';
+import { TopbarComponent } from './topbar/topbar.component';
+import {DropdownModule} from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomecompComponent
+    HomecompComponent,
+    TopbarComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +24,7 @@ import {TableModule} from 'primeng/table';
     BrowserAnimationsModule,
     DataTableModule,
     ButtonModule,DialogModule,
-    InputTextModule,MenubarModule
+    InputTextModule,MenubarModule,DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]

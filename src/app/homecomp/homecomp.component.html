@@ -2,14 +2,10 @@
 
 <div style="text-align:center " >
 
-    <p-menubar [model]="items">
-        <div>
-            <input type="text" pInputText placeholder="Search">
-            <button pButton label="Logout" icon="fa fa-sign-out" style="margin-left:.25em"></button>
-        </div>
-    </p-menubar>
+
 
 <div *ngIf="wines"  >
+        <app-topbar [wines]="wines"> </app-topbar>
     <h3 class="first">Basic</h3>
     <p-table [value]="wines"  [columns]="cols" selectionMode="single" [(selection)]="selectedWine"
     (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="15">

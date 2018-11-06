@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { WineService } from '../wine.service';
 import { Wine } from '../wine';
-import { MenuItem } from 'primeng/primeng';
+
 
 
 
@@ -25,11 +25,11 @@ export class HomecompComponent implements OnInit
   displayDialog: boolean;
   selectedWine:Wine;
   id:any;
-  items: MenuItem[];
+  
 
   ngOnInit() 
   {
-      this.getAllWines();
+    this.getAllWines();
       this.cols = [
           { field: 'id', header: 'id' },
           { field: 'name', header: 'name' },
@@ -39,21 +39,7 @@ export class HomecompComponent implements OnInit
           { field: 'available', header: 'available' }
       ];
 
-      this.items = 
-      [
-        {
-            label: 'Actions',
-            icon: 'pi pi-fw pi-cog',
-            items: [
-                {
-                    label: 'Add',
-                    icon: 'pi pi-fw pi-tags',
-                    command:() => {this.showDialogToAdd()}
-                }
-                ]
-        }
-    
-      ];
+      
   }
 
 
@@ -63,7 +49,7 @@ getAllWines()
     this.wineService.getWines()
     .subscribe((response:Wine[]) => {
       this.wines=response;
-      console.log(this.wines);
+      //console.log(this.wines);
     })
    }
 
