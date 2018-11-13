@@ -1,11 +1,17 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MenuItem } from 'primeng/primeng';
 import { Wine } from '../wine';
+import {SelectItem} from 'primeng/api';
+import { WineService } from '../wine.service';
 
-interface ID {
-  label: string;
-  value: string;
-}
+/* interface ID {
+  id: string;
+  name: string;
+  quantity: number;
+	 total: number;
+	 reserved: number;
+	available: number;
+} */
 
 @Component({
   selector: 'app-topbar',
@@ -18,29 +24,30 @@ interface ID {
 export class TopbarComponent implements OnInit {
 @Input() wines:Wine[];
  
- // itemIds:SelectItem[];
-  itemIds:ID[]=[];
+  wineOptions:SelectItem[];
   items: MenuItem[];
-  wine:any;
   newWine:boolean;
   displayDialog: boolean;
   displayDialog2: boolean;
-  selectedId:ID={label:'',value:''};
+  wine:any;
+  //wine:Wine= {name:'',id:'',total:0,available:0,quantity:0,reserved:0};
+  //selectedId:ID= {name:'',id:'',total:0,available:0,quantity:0,reserved:0};
 
-  constructor() { }
+  constructor(private wineService:WineService) { }
 
   ngOnInit() {
-        for (var i=0; i<this.wines.length; i++) {
-      this.itemIds.push({ label:this.wines[i].id, value:this.wines[i].id} );
-      //console.log(this.itemIds[i]); 
-    } 
+
+
+      
+      this.wineOptions= [
+        {label: 'selectwine',value:null}];
+        for (var i=0; i<this.wines.length; i++){
+          this.wineOptions.push({ label:this.wines[i].name, value:this.wines[i]} );
+        }
+     
+    //console.log(this.wineOptions[5].value.id);
+    console.log(this.wines);
     
-    if (this.selectedId!=null){
-      console.log(this.selectedId)
-    }
-    console.log(this.itemIds);
-    //console.log(this.wines);
-    console.log(this.selectedId)
     this.items = 
       [
         {
@@ -71,6 +78,7 @@ export class TopbarComponent implements OnInit {
 
   showDialogToAdd() 
   {
+    
     this.newWine = true;
     this.wine = {};
     this.displayDialog = true;
@@ -79,27 +87,46 @@ export class TopbarComponent implements OnInit {
 
   showDialogToEdit() 
   {
-    console.log(this.selectedId)
-    this.wine = {};
-    for (var i=0; i<this.wines.length; i++) {
-      if (this.wines[i].id == this.selectedId.label)
-      {this.wine= this.wines[i]}
-     // console.log(this.itemIds[i]); 
-    }  
-   //this.wine =wine;
-   //this.selectedWine=wine;
-   
-   this.displayDialog2 = true;
+    this.wine={};
+    this.newWine = false;
+   this.displayDialog = true;
   }
 
   delete() 
+  { if(!this.newWine)
+    { 
+      this.wineService.deleteWines(this.wine.id);
+      for(var i=0; i<this.wines.length; i++)
+       {
+        if (this.wines[i].id==this.wine.id)
+          { this.wines.splice(i,1);}
+        if(this.wineOptions[i+1].value.id==this.wine.id)
+          { this.wineOptions.splice(i+1,1); }
+       }
+    
+    }
+   this.wine = {};
+  }
+
+
+  save() 
   {
-   // let index = this.wines.indexOf(this.selectedWine);
-    //this.wines = this.wines.filter((val, i) => i != index);
-   // this.wineService.deleteWines(this.selectedWine.id)
-   this.wine = {}; 
-   this.wine = null;
-    this.displayDialog2 = true;
+  console.log(this.wine)
+  if(this.wine.length>0){
+  if(this.newWine)
+    {this.wines.push(this.wine);
+      this.wineOptions.push({ label:this.wine.name, value:this.wine} );
+      this.wineService.addWines(this.wine);
+      console.log(this.newWine);
+      this.wine={};
+      console.log(this.wine);
+      this.newWine=false;
+    }
+   else{
+    this.wineService.editWine(this.wine)
+    console.log(this.newWine);
+   } }
+   this.displayDialog = false;
   }
  
 }

@@ -24,18 +24,18 @@ export class WineService {
   }
 
   public addWines(wine:Wine){
-    console.log(wine);
+   // console.log(wine);
      this.http.post<Wine>('api/winesAdd',wine)
      .subscribe();
     
   }
   public editWine(wine:Wine){
-    console.log(wine);
+    //console.log(wine);
     this.http.put('api/winesEdit/'+wine.id,wine).subscribe();
   }
 
   public deleteWines(id:string){
-    console.log(id);
+   // console.log(id);
     this.http.delete('api/winesDelete/'+id).subscribe();
   }
 

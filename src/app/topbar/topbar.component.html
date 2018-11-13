@@ -5,81 +5,29 @@
   </div>
 </p-menubar>
 
+
+
+
 <p-dialog header="Wine Details" [(visible)]="displayDialog" 
-[responsive]="true" showEffect="fade" [modal]="true" [width]="300">
+[responsive]="true" showEffect="fade" [modal]="true" [width]="500">
 <div class="ui-g ui-fluid" *ngIf="wine">
+    <div class="ui-g-12" *ngIf="!newWine">
+        <div class="ui-g-4">
+            <!-- <label for="name">Name</label> -->
+        </div>
+        <div class="ui-g-8" >
+              
+            <p-dropdown [options]="wineOptions" [(ngModel)]="wine" 
+             [style]="{'width':'275px'}"></p-dropdown>
+            
+        </div>
+    </div>
     <div class="ui-g-12">
         <div class="ui-g-4">
             <label for="id">Id</label>
         </div>
         <div class="ui-g-8">
             <input pInputText id="id" [(ngModel)]="wine.id" />
-        </div>
-    </div>
-    <div class="ui-g-12">
-        <div class="ui-g-4">
-            <label for="name">Name</label>
-        </div>
-        <div class="ui-g-8">
-            <input pInputText id="name" [(ngModel)]="wine.name" />
-        </div>
-    </div>
-    <div class="ui-g-12">
-        <div class="ui-g-4">
-            <label for="quantity">Quantity</label>
-        </div>
-        <div class="ui-g-8">
-            <input pInputText id="quantity" [(ngModel)]="wine.quantity" />
-        </div>
-    </div>
-    <div class="ui-g-12">
-        <div class="ui-g-4">
-            <label for="total">Total</label>
-        </div>
-        <div class="ui-g-8">
-            <input pInputText id="total" [(ngModel)]="wine.total" />
-        </div>
-    </div>
-    <div class="ui-g-12">
-        <div class="ui-g-4">
-            <label for="reserved">Reserved</label>
-        </div>
-        <div class="ui-g-8">
-            <input pInputText id="reserved" [(ngModel)]="wine.reserved" />
-        </div>
-    </div>
-    <div class="ui-g-12">
-        <div class="ui-g-4">
-            <label for="available">Available</label>
-        </div>
-        <div class="ui-g-8">
-            <input pInputText id="available" [(ngModel)]="wine.available" />
-        </div>
-    </div>
-</div>
-<p-footer>
-    <div class="ui-dialog-buttonpane ui-helper-clearfix">
-        <button type="button" pButton icon="fa fa-close" 
-            (click)="delete()" label="Delete"></button>
-        <button type="button" pButton icon="fa fa-check" 
-            (click)="save()" label="Save"></button>
-    </div>
-</p-footer>
-</p-dialog>
-
-
-<p-dialog header="Wine Details" [(visible)]="displayDialog2" 
-[responsive]="true" showEffect="fade" [modal]="true" [width]="500">
-<div class="ui-g ui-fluid" *ngIf="wine">
-    <div class="ui-g-12">
-        <div class="ui-g-4">
-            <label for="id">Id</label>
-        </div>
-        <div class="ui-g-8" >
-              
-            <p-dropdown [options]="itemIds" [(ngModel)]="selectedId" 
-             [style]="{'width':'275px'}"></p-dropdown>
-            
         </div>
     </div>
     <div class="ui-g-12">
